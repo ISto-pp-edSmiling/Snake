@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const bottom = document.querySelectorAll('.bottom')
     const scoreDisplay = document.querySelector('#score')
     const startBtn = document.querySelector('#start-button')
+    const pauseGray = document.querySelector('.pause-grey')
     const width = 10
     let nextRandom = 0
     let timerId
@@ -245,6 +246,7 @@ document.addEventListener('DOMContentLoaded', () => {
         gameOverCheck = false
         })
         scoreDisplay.innerHTML = '0'
+        
         timerId = // reset timerId
         draw()
         displayShape()  
@@ -260,6 +262,7 @@ document.addEventListener('DOMContentLoaded', () => {
         timerId = setInterval(moveDown, interval)
       }
 
+      pauseGray.style.display('block')
     })
   
     //add score

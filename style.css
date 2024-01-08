@@ -2,6 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=DotGothic16&display=swap');
 /* 400 */
 @import url('https://fonts.googleapis.com/css2?family=DotGothic16&family=Kanit:wght@100;200;300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rubik+Doodle+Shadow&display=swap');
 * {
     margin: 0;
     padding: 0;
@@ -22,22 +23,31 @@ body {
 }
 
 .title {
-    font-family: Kanit;
+    font-family: Rubik Doodle Shadow;
     font-weight: 500;
-    font-size: 70px;
+    font-size: 90px;
+    height: 110px;
     position: absolute;
     letter-spacing: 1px;
-    top: 40px;
+    top: 20px;
     left: 90px;
     color: aliceblue;
 }
 
 .four {
-    color:#a9b5e5e',
-    '#c49180',
-    '#71967d',
-    '#48569d',
-    '#7f5585',
+    color:#9b5e5e;
+}
+.T {
+    color: #c49180;
+}
+.R {
+    color:#71967d;
+}
+.I {
+    color:#48569d;
+}
+.S {
+    color: #7f5585;
 }
 
 
@@ -112,14 +122,16 @@ body {
 }
 
 .main-score {
+    border-bottom: 3px solid currentColor;
     font-weight: 400;
     font-size: 35px;
     letter-spacing: 1px;
-    text-decoration: underline;
+    height: 60px
 }
 
 #score {
     font-size: 70px;
+    margin-top: 10px;
     margin-right: 10px;
 }
 
@@ -148,10 +160,27 @@ body {
     border-bottom: solid 5px #1c1d20; 
 }
 
-.cloud {
+#start-button:active {
+    background: #303d69f3;
+}
+
+.pause-gray {
+    display: none;
+    z-index: 1;
     position: absolute;
-    right: 660px;
+    top: 0;
+    left: 0;
+
+    height: 100vh;
+    width: 100vw;
+    background-color: #0d0d0ea9;
+}
+
+.cloud {
+    margin: 0;
+    position: absolute;
+    right: 680px;
     transform: translateY(120%);
     height: 300px;
-    width: 670px;
+    width: 630px; /*cover*/
 }
