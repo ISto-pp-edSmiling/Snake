@@ -26,10 +26,21 @@ body {
     font-weight: 500;
     font-size: 70px;
     position: absolute;
+    letter-spacing: 1px;
     top: 40px;
     left: 90px;
     color: aliceblue;
 }
+
+.four {
+    color:#a9b5e5e',
+    '#c49180',
+    '#71967d',
+    '#48569d',
+    '#7f5585',
+}
+
+
 
 .container {
 
@@ -139,8 +150,8 @@ body {
 
 .cloud {
     position: absolute;
-    right: 650px;
+    right: 660px;
     transform: translateY(120%);
     height: 300px;
-    width: 700px;
+    width: 670px;
 }
