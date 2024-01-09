@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const bottom = document.querySelectorAll('.bottom')
     const scoreDisplay = document.querySelector('#score')
     const startBtn = document.querySelector('#start-button')
-    const pauseGray = document.querySelector('.pause-grey')
+    const pauseGrey = document.querySelector('.pause-grey')
     const width = 10
     let nextRandom = 0
     let timerId
@@ -262,14 +262,14 @@ document.addEventListener('DOMContentLoaded', () => {
         timerId = setInterval(moveDown, interval)
       }
       console.log('check')
-      pauseGray.style.display = 'flex'
+      pauseGrey.style.display = 'block'
     }
   
-    // pauseGray.addEventListener('click', unpauseGray)
+    pauseGrey.addEventListener('click', unpauseGrey)
 
-    function unpauseGray() {  
+    function unpauseGrey() {  
       console.log('yes')
-      pauseGray.style.display = 'none'
+      pauseGrey.style.display = 'none'
       pauseUnpause()
     }
 

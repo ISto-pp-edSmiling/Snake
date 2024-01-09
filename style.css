@@ -162,8 +162,8 @@ body {
     background: #303d69f3;
 }
 
-.pause-gray {
-    font-family: DotGothic16; /*Rubik Doodle Shadow*/
+/*.pause-gray { 
+    font-family: DotGothic16; Rubik Doodle Shadow
     display: none;
     z-index: 1;
     position: absolute;
@@ -176,9 +176,9 @@ body {
     justify-content: center;
     align-items: center;
 
-}
+} */
 
-#paused {
+/* #paused {
     font-size: 100px;
 }
 
@@ -191,7 +191,7 @@ body {
     font-size: 25px;
     
 
-}
+} */
 
 .cloud {
     margin: 0;
