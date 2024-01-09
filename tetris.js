@@ -163,25 +163,25 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     
     function checkRotatedPosition(P){
+      if(current.some(index => squares[currentPosition + index].classList.contains('taken'))) {
+        currentRotation --
+        current = theTetrominoes[random][currentRotation]
+        return;
+      }
       P = P || currentPosition       //get current position.  Then, check if the piece is near the left side.
       if ((P+1) % width < 4) {         //add 1 because the position index can be 1 less than where the piece is (with how they are indexed).     
         if (isAtRight()){            //use actual position to check if it's flipped over to right side
           currentPosition += 1    //if so, add one to wrap it back around
           checkRotatedPosition(P) //check again.  Pass position from start, since long block might need to move more.
+          return
           }
       }
       else if (P % width > 5) {
         if (isAtLeft()){
           currentPosition -= 1
         checkRotatedPosition(P)
+        return
         }
-      }
-    }
-
-    function checkRotatedPosition2() {
-      if(current.some(index => squares[currentPosition + index].classList.contains('taken'))) {
-        currentRotation --
-        current = theTetrominoes[random][currentRotation]
       }
     }
     
@@ -194,8 +194,6 @@ document.addEventListener('DOMContentLoaded', () => {
       }
       current = theTetrominoes[random][currentRotation]
 
-
-      checkRotatedPosition2()
       checkRotatedPosition()
       draw()
     }
@@ -232,7 +230,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   
     //add functionality to the button
-    startBtn.addEventListener('click', () => {
+    startBtn.addEventListener('click', pauseUnpause)
+
+    function pauseUnpause() {
       if (gameOverCheck) {
         squares.forEach(index => {
             index.classList.remove('tetromino')
@@ -261,10 +261,18 @@ document.addEventListener('DOMContentLoaded', () => {
         draw()
         timerId = setInterval(moveDown, interval)
       }
-
-      pauseGray.style.display('block')
-    })
+      console.log('check')
+      pauseGray.style.display = 'flex'
+    }
   
+    // pauseGray.addEventListener('click', unpauseGray)
+
+    function unpauseGray() {  
+      console.log('yes')
+      pauseGray.style.display = 'none'
+      pauseUnpause()
+    }
+
     //add score
     function addScore() {
       for (let i = 0; i < 199; i +=width) {
