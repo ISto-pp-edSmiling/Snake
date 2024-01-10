@@ -59,7 +59,7 @@ body {
 }
   
 .gridingrid {
-    background-color: #3a52994d;
+    background-color: #23315a4d;
     position: relative;
     width: 400px;
     height: 800px;
@@ -149,7 +149,7 @@ body {
     align-items: inherit;
 }
 
-#start-button {
+#pausebtn {
     font-family: DotGothic16;
     letter-spacing: 1.5px;
     cursor: pointer;
@@ -164,7 +164,7 @@ body {
     border-bottom: solid 5px #1c1d20; 
 }
 
-#start-button:active {
+#pausebtn:active {
     background: #303d69f3;
 }
 
@@ -205,6 +205,7 @@ body {
     position: absolute;
     display: flex;
     justify-content: center;
+    align-items: center;
     height: 100px;
     width: 100px;
     top: 50%;
@@ -225,6 +226,34 @@ body {
 }
 
 .beginbtn:active {
+    background: #303d69f3;
+}
+
+.gridingrid .restartbtn {
+    position: absolute;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+    width: 100px;
+    top: 50%;
+    transform: translateX(150%);
+    background-color: #9b5e5e;
+    font-family: DotGothic16;
+    letter-spacing: 1.5px;
+    cursor: pointer;
+    border: 2px solid;
+    color: #ffffff;
+    background: #4e64aaf3;
+    height: 40px;
+    width: 100px;
+    border-left: solid 4px #ffffff;
+    border-top: solid 4px #ffffff;
+    border-right: solid 4px #1c1d20;
+    border-bottom: solid 5px #1c1d20; 
+}
+
+.restartbtn:active {
     background: #303d69f3;
 }
 

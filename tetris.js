@@ -3,14 +3,15 @@ document.addEventListener('DOMContentLoaded', () => {
     let squares = Array.from(document.querySelectorAll('.grid div'))
     const bottom = document.querySelectorAll('.bottom')
     const scoreDisplay = document.querySelector('#score')
-    const startBtn = document.querySelector('#start-button')
+    const pausebtn = document.querySelector('#pausebtn')
     const pauseGrey = document.querySelector('.pause-grey')
     const beginbtn = document.querySelector('.beginbtn')
+    const restartbtn = document.querySelector('.restartbtn')
     const width = 10
     let nextRandom = 0
     let timerId
     let score = 0
-    let gameOverCheck = false, pause = false
+    let pause = false
     let interval = 1000
     const colors = [
       // 'orange',
@@ -233,7 +234,7 @@ document.addEventListener('DOMContentLoaded', () => {
   
     //add functionality to the button
     beginbtn.addEventListener('click', begin)
-    startBtn.addEventListener('click', pauseUnpause)
+    pausebtn.addEventListener('click', pauseUnpause)
 
     function begin() {
       beginbtn.style.display = 'none'
@@ -285,17 +286,18 @@ document.addEventListener('DOMContentLoaded', () => {
       if(current.some(index => squares[currentPosition + index].classList.contains('taken'))) {
         scoreDisplay.innerHTML = 'end'
         clearInterval(timerId)
-        Restart.style.display = 'block'
+       restartbtn.style.display = 'flex'
       }
     
-    
-    Restart.addEventListener('click', gameOverCheck)
     }
 
+    restartbtn.addEventListener('click', gameOverCheck)
+
     function gameOverCheck() {
-      Restart.style.display = 'block'
+      restartbtn.style.display = 'none'
 
       squares.forEach(index => {
+
         index.classList.remove('tetromino')
         index.classList.remove('taken')
         index.style.backgroundColor = ''
