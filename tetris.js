@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const scoreDisplay = document.querySelector('#score')
     const startBtn = document.querySelector('#start-button')
     const pauseGrey = document.querySelector('.pause-grey')
+    const beginbtn = document.querySelector('.beginbtn')
     const width = 10
     let nextRandom = 0
     let timerId
@@ -25,6 +26,8 @@ document.addEventListener('DOMContentLoaded', () => {
     ]
   
 
+
+    
     //The Tetrominoes
     const lTetromino = [
       [1, width+1, width*2+1, 2],
@@ -122,7 +125,7 @@ document.addEventListener('DOMContentLoaded', () => {
         currentPosition = 4
         draw()
         if (interval > 50) {
-          interval --
+          interval -= 2
         }
         displayShape()
         addScore()
@@ -197,7 +200,6 @@ document.addEventListener('DOMContentLoaded', () => {
       checkRotatedPosition()
       draw()
     }
-    /////////
   
     
     
@@ -230,47 +232,32 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   
     //add functionality to the button
+    beginbtn.addEventListener('click', begin)
     startBtn.addEventListener('click', pauseUnpause)
 
+    function begin() {
+      beginbtn.style.display = 'none'
+      pause = false
+      draw()
+      timerId = setInterval(moveDown, interval)
+    }
+
     function pauseUnpause() {
-      if (gameOverCheck) {
-        squares.forEach(index => {
-            index.classList.remove('tetromino')
-            index.classList.remove('taken')
-            index.style.backgroundColor = ''
-        })
-        
-        bottom.forEach(index => {
-            index.style.backgroundColor = ''
 
-        gameOverCheck = false
-        })
-        scoreDisplay.innerHTML = '0'
-        
-        timerId = // reset timerId
-        draw()
-        displayShape()  
-      }
+      clearInterval(timerId)
+      timerId = false
+      pause = true
 
-      if (timerId) {
-        clearInterval(timerId)
-        timerId = null
-        pause = true
-      } else {
-        pause = false
-        draw()
-        timerId = setInterval(moveDown, interval)
-      }
-      console.log('check')
-      pauseGrey.style.display = 'block'
+      pauseGrey.style.display = 'flex' //grey appears
     }
   
     pauseGrey.addEventListener('click', unpauseGrey)
 
     function unpauseGrey() {  
-      console.log('yes')
       pauseGrey.style.display = 'none'
-      pauseUnpause()
+      pause = false
+      draw()
+      timerId = setInterval(moveDown, interval)
     }
 
     //add score
@@ -298,8 +285,28 @@ document.addEventListener('DOMContentLoaded', () => {
       if(current.some(index => squares[currentPosition + index].classList.contains('taken'))) {
         scoreDisplay.innerHTML = 'end'
         clearInterval(timerId)
-        gameOverCheck = true
+        Restart.style.display = 'block'
       }
+    
+    
+    Restart.addEventListener('click', gameOverCheck)
     }
-  
+
+    function gameOverCheck() {
+      Restart.style.display = 'block'
+
+      squares.forEach(index => {
+        index.classList.remove('tetromino')
+        index.classList.remove('taken')
+        index.style.backgroundColor = ''
+      })
+
+      scoreDisplay.innerHTML = '0'
+        
+      timerId = setInterval(moveDown, interval)
+      draw()
+      displayShape() 
+    }
+
+    
   })
