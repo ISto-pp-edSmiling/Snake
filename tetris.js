@@ -11,8 +11,8 @@ document.addEventListener('DOMContentLoaded', () => {
     let nextRandom = 0
     let timerId
     let score = 0
-    let pause = false
     let interval = 1000
+    let gameInProgress = false
     const colors = [
       // 'orange',
       // 'red',
@@ -26,7 +26,8 @@ document.addEventListener('DOMContentLoaded', () => {
       '#7f5585',
     ]
   
-
+    titleTheme = new Audio('music/Titletheme.mp3')
+    titleTheme.play()
 
     
     //The Tetrominoes
@@ -94,7 +95,7 @@ document.addEventListener('DOMContentLoaded', () => {
   
     //assign functions to keyCodes
     function control(e) {
-      if(pause) {return}
+      if(!gameInProgress) {return}
       if(e.key === 'a') {
         moveLeft()
       } else if (e.key === 'w') {
@@ -237,6 +238,10 @@ document.addEventListener('DOMContentLoaded', () => {
     pausebtn.addEventListener('click', pauseUnpause)
 
     function begin() {
+      titleTheme.pause()
+
+      gameInProgress = true
+
       beginbtn.style.display = 'none'
       pause = false
       draw()
@@ -246,6 +251,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function pauseUnpause() {
 
       clearInterval(timerId)
+      gameInProgress = false
       timerId = false
       pause = true
 
@@ -256,6 +262,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function unpauseGrey() {  
       pauseGrey.style.display = 'none'
+      gameInProgress = true
       pause = false
       draw()
       timerId = setInterval(moveDown, interval)
@@ -286,7 +293,12 @@ document.addEventListener('DOMContentLoaded', () => {
       if(current.some(index => squares[currentPosition + index].classList.contains('taken'))) {
         scoreDisplay.innerHTML = 'end'
         clearInterval(timerId)
+
+        gameover = new Audio("music/gameover.mp3");
+        gameover.play()
+
        restartbtn.style.display = 'flex'
+       gameInProgress = false
       }
     
     }
