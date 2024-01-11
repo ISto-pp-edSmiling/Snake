@@ -92,7 +92,6 @@ document.addEventListener('DOMContentLoaded', () => {
   
       })
     }
-  
     //assign functions to keyCodes
     function control(e) {
       if(!gameInProgress) {return}
@@ -243,19 +242,18 @@ document.addEventListener('DOMContentLoaded', () => {
       gameInProgress = true
 
       beginbtn.style.display = 'none'
-      pause = false
       draw()
       timerId = setInterval(moveDown, interval)
     }
 
     function pauseUnpause() {
+      if (gameInProgress = true) {
 
-      clearInterval(timerId)
-      gameInProgress = false
-      timerId = false
-      pause = true
-
-      pauseGrey.style.display = 'flex' //grey appears
+        clearInterval(timerId)
+        gameInProgress = false
+        
+        pauseGrey.style.display = 'flex' //grey appears
+      }
     }
   
     pauseGrey.addEventListener('click', unpauseGrey)
@@ -263,10 +261,10 @@ document.addEventListener('DOMContentLoaded', () => {
     function unpauseGrey() {  
       pauseGrey.style.display = 'none'
       gameInProgress = true
-      pause = false
-      draw()
+
       timerId = setInterval(moveDown, interval)
-    }
+
+    } 
 
     //add score
     function addScore() {
@@ -318,8 +316,7 @@ document.addEventListener('DOMContentLoaded', () => {
       scoreDisplay.innerHTML = '0'
         
       timerId = setInterval(moveDown, interval)
-      draw()
-      displayShape() 
+      begin()
     }
 
     
