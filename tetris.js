@@ -354,7 +354,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
       scoreDisplay.innerHTML = '0'
         
-      timerId = setInterval(moveDown, interval)
       begin()
     }
 
