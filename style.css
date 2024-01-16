@@ -37,7 +37,7 @@ body {
     color:#9b5e5e;
 }
 .T {
-    color: #c49180;
+    color:#c49180;
 }
 .R {
     color:#71967d;
@@ -46,7 +46,7 @@ body {
     color:#48569d;
 }
 .S {
-    color: #7f5585;
+    color:#7f5585;
 }
 
 
@@ -59,7 +59,6 @@ body {
 }
   
 .gridingrid {
-    background-color: #23315a4d;
     position: relative;
     width: 400px;
     height: 800px;
@@ -77,12 +76,15 @@ body {
     width: 40px;
 }
   
+.spotLight {
+    background-color: #23315a4d;
+}
+
 .tetromino{
     border-left: solid 6px rgb(238, 238, 238);
     border-top: solid 6px rgb(238, 238, 238);
     border-right: solid 6px #292929;
     border-bottom: solid 6px #292929; 
-
 }
 
 .mini-grid {

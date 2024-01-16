@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let score = 0
     let interval = 1000
     let gameInProgress = false
+    var nextSpotLight = 0
     const colors = [
       // 'orange',
       // 'red',
@@ -25,10 +26,11 @@ document.addEventListener('DOMContentLoaded', () => {
       '#48569d',
       '#7f5585',
     ]
-  
+    
+    
     titleTheme = new Audio('music/Titletheme.mp3')
     titleTheme.play()
-
+    
     
     //The Tetrominoes
     const lTetromino = [
@@ -37,45 +39,45 @@ document.addEventListener('DOMContentLoaded', () => {
       [1, width+1, width*2+1, width*2],
       [width, width*2, width*2+1, width*2+2]
     ]
-  
+    
     const zTetromino = [
       [0,width,width+1,width*2+1],
       [width+1, width+2,width*2,width*2+1],
       [0,width,width+1,width*2+1],
       [width+1, width+2,width*2,width*2+1]
     ]
-  
+    
     const tTetromino = [
       [1,width,width+1,width+2],
       [1,width+1,width+2,width*2+1],
       [width,width+1,width+2,width*2+1],
       [1,width,width+1,width*2+1]
     ]
-  
+    
     const oTetromino = [
       [0,1,width,width+1],
       [0,1,width,width+1],
       [0,1,width,width+1],
       [0,1,width,width+1]
     ]
-  
+    
     const iTetromino = [
       [1,width+1,width*2+1,width*3+1],
       [width,width+1,width+2,width+3],
       [1,width+1,width*2+1,width*3+1],
       [width,width+1,width+2,width+3]
     ]
-  
+    
     const theTetrominoes = [lTetromino, zTetromino, tTetromino, oTetromino, iTetromino]
-  
+    
     let currentPosition = 4
     let currentRotation = 0
-  
-  
+    
+    
     //randomly select a Tetromino and its first rotation
     let random = Math.floor(Math.random()*theTetrominoes.length)
     let current = theTetrominoes[random][currentRotation]
-  
+    
     //draw the Tetromino
     function draw() {
       current.forEach(index => {
@@ -83,13 +85,13 @@ document.addEventListener('DOMContentLoaded', () => {
         squares[currentPosition + index].style.backgroundColor = colors[random]
       })
     }
-  
+    
     //undraw the Tetromino
     function undraw() {
       current.forEach(index => {
         squares[currentPosition + index].classList.remove('tetromino')
         squares[currentPosition + index].style.backgroundColor = ''
-  
+        
       })
     }
     //assign functions to keyCodes
@@ -106,7 +108,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
     document.addEventListener('keydown', control)
-  
+    
     //move down function
     function moveDown() {
       freeze()
@@ -114,7 +116,7 @@ document.addEventListener('DOMContentLoaded', () => {
       currentPosition += width
       draw()
     }
-  
+    
     //freeze function
     function freeze() {
       if(current.some(index => squares[currentPosition + index + width].classList.contains('taken') || squares[currentPosition + index + width].classList.contains('bottom'))) {
@@ -124,16 +126,19 @@ document.addEventListener('DOMContentLoaded', () => {
         nextRandom = Math.floor(Math.random() * theTetrominoes.length)
         current = theTetrominoes[random][currentRotation]
         currentPosition = 4
+        
         draw()
+        
         if (interval > 50) {
           interval -= 2
         }
+        
         displayShape()
         addScore()
         gameOver()
       }
     }
-  
+    
     //move the tetromino left, unless is at the edge or there is a blockage
     function moveLeft() {
       undraw()
@@ -144,7 +149,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
       draw()
     }
-  
+    
     //move the tetromino right, unless is at the edge or there is a blockage
     function moveRight() {
       undraw()
@@ -155,7 +160,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
       draw()
     }
-  
+    
     
     ///FIX ROTATION OF TETROMINOS A THE EDGE 
     function isAtRight() {
@@ -178,13 +183,13 @@ document.addEventListener('DOMContentLoaded', () => {
           currentPosition += 1    //if so, add one to wrap it back around
           checkRotatedPosition(P) //check again.  Pass position from start, since long block might need to move more.
           return
-          }
+        }
       }
       else if (P % width > 5) {
         if (isAtLeft()){
           currentPosition -= 1
-        checkRotatedPosition(P)
-        return
+          checkRotatedPosition(P)
+          return
         }
       }
     }
@@ -192,33 +197,33 @@ document.addEventListener('DOMContentLoaded', () => {
     //rotate the tetromino
     function rotate() {
       undraw()
-      currentRotation ++
+      currentRotation++
       if(currentRotation === current.length) { //if the current rotation gets to 4, make it go back to 0
         currentRotation = 0
       }
       current = theTetrominoes[random][currentRotation]
-
+      
       checkRotatedPosition()
       draw()
     }
-  
+    
     
     
     //show up-next tetromino in mini-grid display
     const displaySquares = document.querySelectorAll('.mini-grid div')
     const displayWidth = 4
     const displayIndex = 0
-  
-  
+    
+    
     //the Tetrominos without rotations
     const upNextTetrominoes = [
       [1, displayWidth+1, displayWidth*2+1, 2], //lTetromino
       [0, displayWidth, displayWidth+1, displayWidth*2+1], //zTetromino
       [1, displayWidth, displayWidth+1, displayWidth+2], //tTetromino
-      [0, 1, displayWidth, displayWidth+1], //oTetromino
+      [0, 1, displayWidth, displayWidth+1], //oTetrominow
       [1, displayWidth+1, displayWidth*2+1, displayWidth*3+1] //iTetromino
     ]
-  
+    
     //display the shape in the mini-grid display
     function displayShape() {
       //remove any trace of a tetromino form the entire grid
@@ -231,31 +236,65 @@ document.addEventListener('DOMContentLoaded', () => {
         displaySquares[displayIndex + index].style.backgroundColor = colors[nextRandom]
       })
     }
-  
+    
     //add functionality to the button
-    beginbtn.addEventListener('click', begin)
+    
     pausebtn.addEventListener('click', pauseUnpause)
-
+    
     function begin() {
       titleTheme.pause()
-
+      gamemusic = new Audio('music/TetrisTheme.mp3')
+      gamemusic.play()
+      
       gameInProgress = true
-
+      
       beginbtn.style.display = 'none'
       draw()
       timerId = setInterval(moveDown, interval)
     }
+    
+    beginbtn.addEventListener('click', spotLightIntro)
+
+    function spotLightIntro() {
+      titleTheme.pause()
+      beginbtn.style.display = 'none'
+
+      spotLightNoise = new Audio('music/spotlight.mp3')
+      timerId = setInterval(spotLightIntroFn, interval) 
+    }
+
+    function spotLightIntroFn() {
+      spotLight = [0, width, width*2, width*3, width*4, width*5, width*6, width*7, width*8, width*9, width*10, width*11, width*12, width*13, width*14, width*15, width*16, width*17, width*18, width*19]
+      spotLight2 = [9, width+9, width*2+9, width*3+9, width*4+9, width*5+9, width*6+9, width*7+9, width*8+9, width*9+9, width*10+9, width*11+9, width*12+9, width*13+9, width*14+9, width*15+9, width*16+9, width*17+9, width*18+9, width*19+9]
+      spotLight.forEach(index => {
+        squares[nextSpotLight + index].classList.add('spotLight')
+      })
+
+      spotLight2.forEach(index => {
+        squares[index - nextSpotLight].classList.add('spotLight')
+      })  
+
+      nextSpotLight++
+      spotLightNoise.play()
+      setTimeout(spotLightNoise.pause(), 1000)
+
+      if (nextSpotLight == 5) {
+        clearInterval(timerId)
+        begin()
+      }
+    }
+
 
     function pauseUnpause() {
-      if (gameInProgress = true) {
-
+      if (gameInProgress === true) {
+        
         clearInterval(timerId)
         gameInProgress = false
         
         pauseGrey.style.display = 'flex' //grey appears
       }
     }
-  
+    
     pauseGrey.addEventListener('click', unpauseGrey)
 
     function unpauseGrey() {  
@@ -291,7 +330,8 @@ document.addEventListener('DOMContentLoaded', () => {
       if(current.some(index => squares[currentPosition + index].classList.contains('taken'))) {
         scoreDisplay.innerHTML = 'end'
         clearInterval(timerId)
-
+        interval = 1000
+        gamemusic.pause()
         gameover = new Audio("music/gameover.mp3");
         gameover.play()
 
