@@ -276,7 +276,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
       nextSpotLight++
       spotLightNoise.play()
-      setTimeout(spotLightNoise.pause(), 1000)
 
       if (nextSpotLight == 5) {
         clearInterval(timerId)
