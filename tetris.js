@@ -6,11 +6,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const pausebtn = document.querySelector('#pausebtn')
     const pauseGrey = document.querySelector('.pause-grey')
     const beginbtn = document.querySelector('.beginbtn')
-    const restartbtn = document.querySelector('.restartbtn')
+    const restartbtn = document.querySelector('.restartbtn') 
+    const combotext = document.querySelector('.combo')
+    const comboX = document.querySelector('.combo-numb')
     const width = 10
     let nextRandom = 0
     let timerId
     let score = 0
+    let combo = 0
     let interval = 1000
     let gameInProgress = false
     var nextSpotLight = 0
@@ -242,6 +245,7 @@ document.addEventListener('DOMContentLoaded', () => {
     pausebtn.addEventListener('click', pauseUnpause)
     
     function begin() {
+
       titleTheme.pause()
       gamemusic = new Audio('music/TetrisTheme.mp3')
       gamemusic.play()
@@ -317,9 +321,22 @@ document.addEventListener('DOMContentLoaded', () => {
             squares[index].classList.remove('tetromino')
             squares[index].style.backgroundColor = ''
           })
+
+          combo++
+          if (combo > 1) {
+            comboX.innerHTML(`X${combo}`)
+            combotext.style.display = 'block'
+            combotext.classList.add('fadeOut')
+          }
+          
+          else {
+            combo = 0
+          }
+
           const squaresRemoved = squares.splice(i, width)
           squares = squaresRemoved.concat(squares)
           squares.forEach(cell => grid.appendChild(cell))
+      
         }
       }
     }
@@ -353,7 +370,7 @@ document.addEventListener('DOMContentLoaded', () => {
       })
 
       scoreDisplay.innerHTML = '0'
-        
+         
       begin()
     }
 

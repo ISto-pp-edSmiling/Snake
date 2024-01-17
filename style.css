@@ -267,3 +267,32 @@ body {
     height: 300px;
     width: 630px; /*cover*/
 }
+
+.gridingrid .combo {
+    display: none;
+    position: absolute;
+    font-family: DotGothic16;
+    letter-spacing: 0.5px;
+    color: white;
+    top: 80%;
+    transform: translateX(170%);
+    height: 100px;
+    width: 100px;
+}
+
+.gridingrid .combo-numb {
+    font-size: 14px;
+}
+
+.fadeOut {
+    animation: 1s fadeOut forwards;
+    animation-delay: 0.5s;
+}
+
+@keyframes fadeOut {
+    to {
+        transform: translateY(-100%);
+        scale: 0;
+        opacity: 0;
+    }
+}
