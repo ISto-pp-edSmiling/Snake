@@ -345,10 +345,15 @@ document.addEventListener('DOMContentLoaded', () => {
           comboX.innerHTML = `X${combo}`
           combotext.style.display = 'block'
           combotext.classList.add('fadeOut')
-          
+
+          wombo = new Audio('music/womboN.mp3')
+          randomWombo = Math.floor(Math.random() * 5)
+          wombo.src = `music/wombo${randomWombo}.mp3`
+          wombo.play()
+
         }
       }
-      else {combo = 0}
+
       combochecker = false
     }
   
