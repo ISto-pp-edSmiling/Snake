@@ -14,6 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let timerId
     let score = 0
     let combo = 0
+    let combochecker = false
     let interval = 1000
     let gameInProgress = false
     var nextSpotLight = 0
@@ -129,6 +130,9 @@ document.addEventListener('DOMContentLoaded', () => {
         nextRandom = Math.floor(Math.random() * theTetrominoes.length)
         current = theTetrominoes[random][currentRotation]
         currentPosition = 4
+
+        combotext.style.display = 'none'
+        combotext.classList.remove('fadeOut')
         
         draw()
         
@@ -289,6 +293,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     function pauseUnpause() {
+      gamemusic.pause()
+
       if (gameInProgress === true) {
         
         clearInterval(timerId)
@@ -300,7 +306,9 @@ document.addEventListener('DOMContentLoaded', () => {
     
     pauseGrey.addEventListener('click', unpauseGrey)
 
-    function unpauseGrey() {  
+    function unpauseGrey() {
+      gamemusic.play()
+
       pauseGrey.style.display = 'none'
       gameInProgress = true
 
@@ -321,24 +329,27 @@ document.addEventListener('DOMContentLoaded', () => {
             squares[index].classList.remove('tetromino')
             squares[index].style.backgroundColor = ''
           })
-
-          combo++
-          if (combo > 1) {
-            comboX.innerHTML(`X${combo}`)
-            combotext.style.display = 'block'
-            combotext.classList.add('fadeOut')
-          }
           
-          else {
-            combo = 0
-          }
-
+          combochecker = true
+          
           const squaresRemoved = squares.splice(i, width)
           squares = squaresRemoved.concat(squares)
           squares.forEach(cell => grid.appendChild(cell))
-      
+          
         }
       }
+      
+      if (combochecker) {
+        combo++
+        if (combo>1) {
+          comboX.innerHTML = `X${combo}`
+          combotext.style.display = 'block'
+          combotext.classList.add('fadeOut')
+          
+        }
+      }
+      else {combo = 0}
+      combochecker = false
     }
   
     //game over

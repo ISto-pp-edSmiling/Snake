@@ -278,10 +278,11 @@ body {
     transform: translateX(170%);
     height: 100px;
     width: 100px;
+    font-size: 18px;
 }
 
 .gridingrid .combo-numb {
-    font-size: 14px;
+    font-size: 16px;
 }
 
 .fadeOut {
@@ -291,8 +292,7 @@ body {
 
 @keyframes fadeOut {
     to {
-        transform: translateY(-100%);
-        scale: 0;
+        transform: translateY(-100%) scale(0);
         opacity: 0;
     }
 }
