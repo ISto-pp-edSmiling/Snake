@@ -190,16 +190,16 @@ body {
     font-size: 100px;
 }
 
-#resume-desc {
+#resume-desc, .volume-slider{
     font-size: 20px;
 }
 
 #resume {
     color: #4e64aaf3;
     font-size: 25px;
-    
-
 }
+
+
 
 
 
@@ -278,15 +278,15 @@ body {
     transform: translateX(170%);
     height: 100px;
     width: 100px;
-    font-size: 18px;
+    font-size: 20px;
 }
 
 .gridingrid .combo-numb {
-    font-size: 16px;
+    font-size: 18px;
 }
 
 .fadeOut {
-    animation: 1s fadeOut forwards;
+    animation: 2s fadeOut forwards;
     animation-delay: 0.5s;
 }
 

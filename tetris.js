@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const restartbtn = document.querySelector('.restartbtn') 
     const combotext = document.querySelector('.combo')
     const comboX = document.querySelector('.combo-numb')
+    const volumeSlider = document.querySelector('.volume-slider')
     const width = 10
     let nextRandom = 0
     let timerId
@@ -304,6 +305,13 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
     
+    const handleVolume = (vol) => {
+      gamemusic.volume = vol.target.value; 
+      // passing the range slider value as an audio volume
+    }
+
+    volumeSlider.addEventListener("input", handleVolume);
+
     pauseGrey.addEventListener('click', unpauseGrey)
 
     function unpauseGrey() {
@@ -313,7 +321,6 @@ document.addEventListener('DOMContentLoaded', () => {
       gameInProgress = true
 
       timerId = setInterval(moveDown, interval)
-
     } 
 
     //add score
@@ -347,12 +354,16 @@ document.addEventListener('DOMContentLoaded', () => {
           combotext.classList.add('fadeOut')
 
           wombo = new Audio('music/womboN.mp3')
-          randomWombo = Math.floor(Math.random() * 5)
+          randomWombo = Math.floor(Math.random() * 4)
+          console.log(randomWombo)
           wombo.src = `music/wombo${randomWombo}.mp3`
           wombo.play()
 
         }
       }
+    else {
+      combo = 0
+    }
 
       combochecker = false
     }
@@ -392,3 +403,4 @@ document.addEventListener('DOMContentLoaded', () => {
 
     
   })
+
